@@ -1,5 +1,6 @@
 package org.likelion.spring.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -29,6 +30,7 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) // cascade - persist all
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
@@ -38,6 +40,11 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status; // 주문 상태 [ORDER, CANCEL]
 
+    // 연관관계 메서드
+    public void setMember(Member member) {
+        this.member = member;
+        member.getOrders().add(this);
+    }
     public void addOrderItem(OrderItem orderItem) {
         orderItems.add(orderItem);
         orderItem.setOrder(this);
@@ -57,6 +64,7 @@ public class Order {
             order.addOrderItem(orderItem);
         }
         order.setStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
         return order;
     }
 
