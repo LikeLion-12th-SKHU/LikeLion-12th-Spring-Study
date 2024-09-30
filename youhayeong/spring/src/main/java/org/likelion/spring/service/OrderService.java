@@ -1,14 +1,12 @@
 package org.likelion.spring.service;
 
 import lombok.RequiredArgsConstructor;
-import org.likelion.spring.domain.Delivery;
-import org.likelion.spring.domain.Member;
-import org.likelion.spring.domain.Order;
-import org.likelion.spring.domain.OrderItem;
+import org.likelion.spring.domain.*;
 import org.likelion.spring.domain.item.Item;
 import org.likelion.spring.repository.ItemRepository;
 import org.likelion.spring.repository.MemberRepository;
 import org.likelion.spring.repository.OrderRepository;
+import org.likelion.spring.repository.OrderSearch;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +30,7 @@ public class OrderService {
         // 배송정보 생성
         Delivery delivery = new Delivery();
         delivery.setAddress(member.getAddress());
+        delivery.setStatus(DeliveryStatus.READY);
 
         // 주문 상품 생성
         OrderItem orderItem = OrderItem.createOrderItem(item, item.getPrice(), count);
@@ -54,8 +53,8 @@ public class OrderService {
         order.cancel();
     }
 
-    /*// 검색
+    // 검색
     public List<Order> findOrders(OrderSearch orderSearch) {
         return orderRepository.findAll(orderSearch);
-    }*/
+    }
 }
