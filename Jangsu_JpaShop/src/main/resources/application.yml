@@ -1,20 +1,18 @@
 spring:
   datasource:
-    url: jdbc:h2:tcp://localhost/~/test1W
+    url: jdbc:h2:tcp://localhost/~/test2W
     username: sa
     password:
     driver-class-name: org.h2.Driver
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
-        show_sql: true
+#        show_sql: true
         format_sql: true
-    open-in-view: false
 
-logging:
-  level:
-    org.hibernate.sql: debug
-    org.hibernate.type : warn
+logging.level:
+  org.hibernate.SQL: debug
+#  org.hibernate.type: trace
