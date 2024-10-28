@@ -16,6 +16,8 @@ import java.util.stream.Collectors;
 public class MemberApiController {
     private  final MemberService memberService;
 
+    // v1은 안 좋은 버전, v2는 권장 버전
+
     @GetMapping("/api/v1/members")
     public List<Member> membersV1() {
         return memberService.findMembers();
