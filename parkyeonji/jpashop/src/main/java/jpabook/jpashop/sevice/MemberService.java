@@ -45,4 +45,10 @@ public class MemberService {
 
     /* 읽기에는 @Transactional(readOnly = true)를 가급적 넣는 것이 좋음(읽기가 아닌 것에는 절대 넣으면 안됨. 데이터 변경 불가) */
 
+    @Transactional
+    public void update(Long id, String name) {
+        Member member = memberRepository.findOne(id);
+        member.setName(name);
+    }
+
 }
