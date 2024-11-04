@@ -1,8 +1,8 @@
 package jpabook.jpashop.controller;
 
+import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
-import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.repository.OrderSearch;
 import jpabook.jpashop.service.ItemService;
 import jpabook.jpashop.service.MemberService;
@@ -17,11 +17,13 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class OrderController {
-
     private final OrderService orderService;
     private final MemberService memberService;
     private final ItemService itemService;
 
+    /**
+     * 상품 주문
+     */
     @GetMapping("/order")
     public String createForm(Model model) {
 
@@ -34,6 +36,9 @@ public class OrderController {
         return "order/orderForm";
     }
 
+    /**
+     * 상품 주문
+     */
     @PostMapping("/order")
     public String order(@RequestParam("memberId") Long memberId,
                         @RequestParam("itemId") Long itemId,
@@ -43,6 +48,9 @@ public class OrderController {
         return "redirect:/orders";
     }
 
+    /**
+     * 주문 검색
+     */
     @GetMapping("/orders")
     public String orderList(@ModelAttribute("orderSearch") OrderSearch orderSearch, Model model) {
         List<Order> orders = orderService.findOrders(orderSearch);
@@ -51,6 +59,9 @@ public class OrderController {
         return "order/orderList";
     }
 
+    /**
+     * 주문 취소
+     */
     @PostMapping("/orders/{orderId}/cancel")
     public String cancelOrder(@PathVariable("orderId") Long orderId) {
         orderService.cancelOrder(orderId);

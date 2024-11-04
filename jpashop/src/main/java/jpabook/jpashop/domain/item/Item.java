@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jpabook.jpashop.domain.Category;
 import lombok.Getter;
 import lombok.Setter;
+import org.skhu.jpashop.exception.NotEnoughStockException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,11 +33,10 @@ public abstract class Item {
     }
 
 
-    public void removeStock(intckQuantity - quantity;
-        if(restStock < 0) {
-        throw new NotEnoughS quantity) {
-        int restStock = this.stotockException("need more stock");
-        }
+    public void removeStock(int quantity) {
+        int restStock = this.stockQuantity - quantity;
+        if (restStock < 0)
+            throw new NotEnoughStockException("need more stock");
         this.stockQuantity = restStock;
     }
 }
