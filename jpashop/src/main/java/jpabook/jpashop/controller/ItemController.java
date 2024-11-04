@@ -16,7 +16,6 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class ItemController {
-
     private final ItemService itemService;
 
     @GetMapping("/items/new")
@@ -25,9 +24,8 @@ public class ItemController {
         return "items/createItemForm";
     }
 
-    @PostMapping("/items/new")
+    @PostMapping("items/new")
     public String create(BookForm form) {
-
         Book book = new Book();
         book.setName(form.getName());
         book.setPrice(form.getPrice());
@@ -39,6 +37,9 @@ public class ItemController {
         return "redirect:/";
     }
 
+    /**
+     * 상품 목록
+     */
     @GetMapping("/items")
     public String list(Model model) {
         List<Item> items = itemService.findItems();
@@ -46,6 +47,9 @@ public class ItemController {
         return "items/itemList";
     }
 
+    /**
+     * 상품 수정 폼
+     */
     @GetMapping("items/{itemId}/edit")
     public String updateItemForm(@PathVariable("itemId") Long itemId, Model model) {
         Book item = (Book) itemService.findOne(itemId);
@@ -62,16 +66,13 @@ public class ItemController {
         return "items/updateItemForm";
     }
 
-    @PostMapping("items/{itemId}/edit")
-    public String updateItem(@PathVariable Long itemId, @ModelAttribute("form") BookForm form) {
-
+    /**
+     * 상품 수정
+     */
+    @PostMapping(value = "/items/{itemId}/edit")
+    public String updateItem(@PathVariable Long itemId, @ModelAttribute("form")
+    BookForm form) {
         itemService.updateItem(itemId, form.getName(), form.getPrice(), form.getStockQuantity());
-
         return "redirect:/items";
     }
 }
-
-
-
-
-
