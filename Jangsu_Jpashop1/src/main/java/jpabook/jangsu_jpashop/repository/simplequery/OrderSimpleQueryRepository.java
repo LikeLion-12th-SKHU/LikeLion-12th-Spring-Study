@@ -1,4 +1,4 @@
-package jpabook.jangsu_jpashop.repository;
+package jpabook.jangsu_jpashop.repository.simplequery;
 
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
