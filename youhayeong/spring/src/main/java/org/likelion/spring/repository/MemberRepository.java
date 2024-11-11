@@ -31,3 +31,12 @@ public class MemberRepository {
                 .getResultList();
     }
 }
+
+/*
+- memberRepository interface로 구현 (=JPA)
+
+public interface MemberRepository extends JpaRepository<Member, Long> {
+    List<Member> findByName(String name);
+}
+
+ */
