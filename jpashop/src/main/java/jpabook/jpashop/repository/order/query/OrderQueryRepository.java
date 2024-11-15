@@ -1,4 +1,4 @@
-package jpabook.jpashop.repository.order;
+package jpabook.jpashop.repository.order.query;
 
 import jakarta.persistence.EntityManager;
 import java.util.List;
